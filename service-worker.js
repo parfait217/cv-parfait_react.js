@@ -3,7 +3,6 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  // Ajoutez ici les chemins vers vos assets statiques importants
   '/assets/index-CioGEDsf.css',
   '/assets/index-DDwDUxb2.js',
   '/assets/accueil-CVTm2QPe.mp3',
@@ -16,12 +15,12 @@ const urlsToCache = [
   '/assets/guerre-CJ5Hkc5M.jpeg',
   '/assets/Untitled-f97gyyVf.jpeg',
   '/assets/mages-dipwYHEi.jpeg',
-  '/icons/android-chrome-192x192.png',
-  '/icons/android-chrome-512x512.png'
+  '/icons/image_1.jpg',
+  '/icons/image_2.jpg',
+  '/icons/image_3.jpg'
 ];
 
 self.addEventListener('install', function(event) {
-  // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
@@ -29,18 +28,50 @@ self.addEventListener('install', function(event) {
         return cache.addAll(urlsToCache);
       })
   );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName !== CACHE_NAME;
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+  self.clients.claim();
 });
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(    
+  event.respondWith(
     caches.match(event.request)
       .then(function(response) {
-        // Cache hit - return response
         if (response) {
           return response;
         }
-        return fetch(event.request);
-      }
-    )
+        
+        return fetch(event.request).then(
+          function(response) {
+            // Vérifiez que nous avons reçu une réponse valide
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+            
+            // Clone la réponse
+            var responseToCache = response.clone();
+            
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                cache.put(event.request, responseToCache);
+              });
+            
+            return response;
+          }
+        );
+      })
   );
 });
