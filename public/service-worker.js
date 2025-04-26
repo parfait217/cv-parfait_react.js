@@ -32,7 +32,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
+  event.respondWith(    
     caches.match(event.request)
       .then(function(response) {
         // Cache hit - return response
