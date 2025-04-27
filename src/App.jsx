@@ -9,11 +9,14 @@ import Accueil from './pages/Accueil';
 import Experience from './pages/Experience';
 import Loisirs from './pages/Loisirs';
 import Contact from './pages/Contact';
+import InstallPWA from './components/InstallPWA';
+
 
 function App() {
   return (
     <Router>
       <div className="app">
+        <InstallPWA />
         <Header />
         <Navigation />
         <main>
@@ -22,6 +25,8 @@ function App() {
             <Route path="/experience" element={<Experience />} />
             <Route path="/loisirs" element={<Loisirs />} />
             <Route path="/contact" element={<Contact />} />
+             {/* Redirection pour toutes les routes non trouvées vers l'accueil */}
+
           </Routes>
         </main>
         <Footer />

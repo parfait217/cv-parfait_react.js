@@ -36,7 +36,7 @@ function Accueil() {
         animate="visible"
         variants={sectionVariants}
       >
-        <h1>Qui suis-je ?</h1>
+        <h1>Qui suis-je  ?</h1>
         <div className="sec">
           <div className="left">
             <img src={profileImg} alt="Une photo de moi" width={100}  height={100} /> 
