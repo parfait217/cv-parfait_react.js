@@ -15,12 +15,16 @@ const urlsToCache = [
   '/assets/guerre-CJ5Hkc5M.jpeg',
   '/assets/Untitled-f97gyyVf.jpeg',
   '/assets/mages-dipwYHEi.jpeg',
-  '/icons/image_1.jpg',
-  '/icons/image_2.jpg',
-  '/icons/image_3.jpg'
+  '/icons/image_192.png',
+  '/icons/image_512.png',
+  "/screenshots/desktop.png",
+  '/screenshots/mobile.png',
+
 ];
 
+// Installation du service worker
 self.addEventListener('install', function(event) {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
@@ -28,9 +32,9 @@ self.addEventListener('install', function(event) {
         return cache.addAll(urlsToCache);
       })
   );
-  self.skipWaiting();
 });
 
+// Activation du service worker
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
@@ -46,6 +50,7 @@ self.addEventListener('activate', function(event) {
   self.clients.claim();
 });
 
+// Interception des requêtes
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
@@ -53,25 +58,7 @@ self.addEventListener('fetch', function(event) {
         if (response) {
           return response;
         }
-        
-        return fetch(event.request).then(
-          function(response) {
-            // Vérifiez que nous avons reçu une réponse valide
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            
-            // Clone la réponse
-            var responseToCache = response.clone();
-            
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-            
-            return response;
-          }
-        );
+        return fetch(event.request);
       })
   );
 });
