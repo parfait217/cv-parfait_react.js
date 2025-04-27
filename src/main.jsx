@@ -10,12 +10,10 @@ root.render(
   </React.StrictMode>
 );
 
-
-// Enregistrement du service worker
 // Enregistrement du service worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('/cv-parfait_react.js/service-worker.js')
       .then(registration => {
         console.log('Service worker registered: ', registration);
       })

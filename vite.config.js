@@ -1,21 +1,8 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  build: {
-    outDir: 'dist',
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-      },
-    },
-  },
-  server: {
-    // Assurez-vous que les fichiers dans public sont accessibles
-    fs: {
-      allow: ['..'],
-    },
-  },
+  base: '/cv-parfait_react.js/', // Important pour les sous-chemins GitHub Pages
 });

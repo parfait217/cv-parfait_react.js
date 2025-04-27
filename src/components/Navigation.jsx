@@ -1,4 +1,3 @@
-
 // src/components/Navigation.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -20,16 +19,16 @@ function Navigation() {
       <div className={`table ${isMenuOpen ? 'menu-open' : ''}`}>
         <ul>
           <li className="menu-ind">
-            <Link to="/">Accueil</Link>
+            <Link to="/cv-parfait_react.js/">Accueil</Link>
           </li>
           <li className="menu-exp">
-            <Link to="/experience">Experiences professionnelles</Link>
+            <Link to="/cv-parfait_react.js/experience">Experiences professionnelles</Link>
           </li>
           <li className="menu-hob">
-            <Link to="/loisirs">Loisirs</Link>
+            <Link to="/cv-parfait_react.js/loisirs">Loisirs</Link>
           </li>
           <li className="menu-con">
-            <Link to="/contact">Contactez-moi</Link>
+            <Link to="/cv-parfait_react.js/contact">Contactez-moi</Link>
           </li>
         </ul>
       </div>
