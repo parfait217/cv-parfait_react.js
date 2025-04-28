@@ -1,7 +1,7 @@
 // src/components/Navigation.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+  
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,16 +19,16 @@ function Navigation() {
       <div className={`table ${isMenuOpen ? 'menu-open' : ''}`}>
         <ul>
           <li className="menu-ind">
-            <Link to="/cv-parfait_react.js/">Accueil</Link>
+            <Link to="/">Accueil</Link>
           </li>
           <li className="menu-exp">
-            <Link to="/cv-parfait_react.js/experience">Experiences professionnelles</Link>
+            <Link to="/experience">Experiences professionnelles</Link>
           </li>
           <li className="menu-hob">
-            <Link to="/cv-parfait_react.js/loisirs">Loisirs</Link>
+            <Link to="/loisirs">Loisirs</Link>
           </li>
           <li className="menu-con">
-            <Link to="/cv-parfait_react.js/contact">Contactez-moi</Link>
+            <Link to="/contact">Contactez-moi</Link>
           </li>
         </ul>
       </div>
